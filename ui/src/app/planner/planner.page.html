@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Plan your trip</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="controls else loading" >
+    <dynamic-form 
+      #dynamicForm="dynamicForm" 
+      [controls]="controls" 
+      [form]="form">
+    </dynamic-form>
+  </div>
+
+	<ng-template #loading>
+		<div class="loading">
+			Getting Data...
+		</div>
+	</ng-template>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons end>
+      <button ion-button icon-right (click)="submitForm($event)">
+        Submit
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
