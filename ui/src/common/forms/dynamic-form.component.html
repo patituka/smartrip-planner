@@ -10,17 +10,35 @@
         </ion-input>
 
         <ion-textarea 
-            *ngIf="control.controlType === 'textarea'" 
-            [formControlName]="control.key"
-            [id]="control.key" 
-            [placeholder]="control.label" 
-            rows="4">
+          *ngIf="control.controlType === 'textarea'" 
+          [formControlName]="control.key"
+          [id]="control.key" 
+          [placeholder]="control.label" 
+          rows="4">
         </ion-textarea>
-  
-        <ion-label *ngIf="control.controlType === 'select'">
-            {{control.label}}
+
+        <ion-datetime 
+          *ngIf="control.controlType === 'datetime'" 
+          [formControlName]="control.key"
+          [placeholder]="control.label" 
+          [min]="minDate"
+          displayFormat="DD/MM/YYYY">
+        </ion-datetime>
+
+        <ion-label 
+          *ngIf="control.withLabel">
+          {{control.label}}
         </ion-label>
 
+        <ion-range 
+          *ngIf="control.controlType === 'range'" 
+          [formControlName]="control.key" 
+          [min]="control.min" 
+          [max]="control.max" pin color="secondary">
+          <ion-icon slot="start" size="small" [name]="control.icon"></ion-icon>
+          <ion-icon slot="end" [name]="control.icon"></ion-icon>
+        </ion-range>
+  
         <ion-select 
             [formControlName]="control.key" 
             [id]="control.key" 
@@ -30,8 +48,17 @@
             *ngFor="let option of control.options" 
             [value]="option">{{option.label}}
           </ion-option>
-          
         </ion-select>
+
+      <ion-segment value="favorite">
+
+        <ion-segment-button 
+          *ngFor="let option of control.options" 
+          [value]="option.key">
+          <ion-label>{{option.label}}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
       </ion-item>
     </ion-list>
   </form>

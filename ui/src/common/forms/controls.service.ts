@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ControlDescriptor } from './control';
+import { DatetimeControl } from './datetime.control';
+import { RangeControl } from './range.control';
 import { SelectControl } from './select.control';
 import { TextareaControl } from './textarea.control';
 import { TextboxControl } from './textbox.control';
@@ -26,6 +28,10 @@ export class ControlsService {
           return new TextareaControl(options);
         case 'select':
           return new SelectControl(options);
+        case 'datetime':
+          return new DatetimeControl(options);
+        case 'range':
+          return new RangeControl(options);
         default:
           console.error(`${descriptor.type} is not supported`);
       }
