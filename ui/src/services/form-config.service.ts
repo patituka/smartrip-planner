@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HTTP } from '@ionic-native/http/ngx';
+import { HTTP, HTTPResponse } from '@ionic-native/http/ngx';
 
 @Injectable()
 export class FormConfigService {
@@ -7,9 +7,7 @@ export class FormConfigService {
 
   constructor(private http: HTTP) { }
 
-  public getFormConfig(filename) {    
+  public getFormConfig(filename): Promise<HTTPResponse> {    
     return this.http.get(this.BASEURL + filename, {}, {});
   }
-
-
 }

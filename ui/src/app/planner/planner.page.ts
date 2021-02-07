@@ -4,6 +4,7 @@ import { ControlBase } from 'src/common/forms/control-base';
 import { ControlsService } from 'src/common/forms/controls.service';
 import { FormConfigService } from 'src/services/form-config.service';
 import { AlertController } from '@ionic/angular';
+import { ControlDescriptor } from 'src/common/forms/control';
 
 @Component({
 	templateUrl: 'planner.page.html',
@@ -25,10 +26,11 @@ export class PlannerPage {
 	}
 
 	ionViewWillEnter() {
+
 		this.configService.getFormConfig(this.FILENAME)
 			.then(res => {
-				console.log(res);
-				this.controls = this.controlsService.getControls(res.data)
+				const controls: ControlDescriptor[] = JSON.parse(res.data);
+				this.controls = this.controlsService.getControls(controls);
 			})
 			
 		this.form.valueChanges
