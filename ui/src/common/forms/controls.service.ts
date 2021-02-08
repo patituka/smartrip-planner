@@ -10,7 +10,7 @@ import { TextboxControl } from './textbox.control';
 
 @Injectable()
 export class ControlsService {
-  
+
   getControls(descriptors: ControlDescriptor[]) {
     let controls = descriptors.map((descriptor, index) => {
       let options = {
@@ -20,6 +20,7 @@ export class ControlsService {
         label: descriptor.title,
         value: '',
         required: descriptor.required,
+        withLabel: descriptor.withLabel,
         order: index
       };
 
