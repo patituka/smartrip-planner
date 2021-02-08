@@ -22,6 +22,9 @@ export class DynamicFormComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.controlsService.toFormGroup(this.form, this.controls);
+
+
+    console.log(this.controls);
   }
 
   get start(){

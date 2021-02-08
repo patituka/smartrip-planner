@@ -1,65 +1,49 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="form">
-    <ion-list>
-      <ion-item *ngFor="let control of controls">
-        <ion-input 
-            *ngIf="control.controlType === 'textbox'"
-            [formControlName]="control.key"
-            [id]="control.key" 
-            [type]="control.type" 
-            [placeholder]="control.label">
-        </ion-input>
+  <ion-list>
+    <ion-item *ngFor="let control of controls">
 
-        <ion-textarea 
-          *ngIf="control.controlType === 'textarea'" 
-          [formControlName]="control.key"
-          [id]="control.key" 
-          [placeholder]="control.label" 
-          rows="4">
-        </ion-textarea>
+      <ion-label *ngIf="control.withLabel">{{ control.label }}</ion-label>
 
-        <ion-datetime 
-          *ngIf="control.controlType === 'datetime'" 
-          [formControlName]="control.key"
-          [placeholder]="control.label" 
-          [min]="minDate"
-          displayFormat="DD/MM/YYYY">
-        </ion-datetime>
+      <ion-input *ngIf="control.controlType === 'textbox'" [formControlName]="control.key" [id]="control.key"
+        [type]="control.type" [placeholder]="control.label">
+      </ion-input>
 
-        <ion-label 
-          *ngIf="control.withLabel">
-          {{control.label}}
-        </ion-label>
+      <ion-textarea *ngIf="control.controlType === 'textarea'" [formControlName]="control.key" [id]="control.key"
+        [placeholder]="control.label" rows="4">
+      </ion-textarea>
 
-        <ion-range 
-          *ngIf="control.controlType === 'range'" 
-          [formControlName]="control.key" 
-          [min]="control.min" 
-          [max]="control.max" pin color="secondary">
-          <ion-icon slot="start" size="small" [name]="control.icon"></ion-icon>
-          <ion-icon slot="end" [name]="control.icon"></ion-icon>
-        </ion-range>
-  
-        <ion-select 
-            [formControlName]="control.key" 
-            [id]="control.key" 
-            *ngIf="control.controlType === 'select'">
+      <ion-datetime *ngIf="control.controlType === 'datetime'" [formControlName]="control.key"
+        [placeholder]="control.label" [min]="minDate" displayFormat="DD/MM/YYYY">
+      </ion-datetime>
 
-          <ion-option 
-            *ngFor="let option of control.options" 
-            [value]="option">{{option.label}}
-          </ion-option>
-        </ion-select>
+      <div *ngIf="control.controlType === 'checkbox'">
+        <div *ngFor="let option of control.options">
+          <ion-label>{{option.label}}</ion-label>
+          <ion-checkbox></ion-checkbox>
+        </div>
+      </div>
 
-      <ion-segment value="favorite">
+      <ion-range *ngIf="control.controlType === 'range'" [formControlName]="control.key" [min]="control.min"
+        [max]="control.max" pin color="secondary">
+        <ion-icon slot="start" size="small" [name]="control.icon"></ion-icon>
+        <ion-icon slot="end" [name]="control.icon"></ion-icon>
+      </ion-range>
 
-        <ion-segment-button 
-          *ngFor="let option of control.options" 
-          [value]="option.key">
+      <ion-select *ngIf="control.controlType === 'select'" [formControlName]="control.key" [id]="control.key"
+        multiple="true">
+        <ion-select-option *ngFor="let option of control.options" [value]="option.key">{{option.label}}
+        </ion-select-option>
+      </ion-select>
+
+      <ion-segment 
+        *ngIf="control.controlType === 'segment'" 
+        [formControlName]="control.key"
+        [value]="control.value">
+        <ion-segment-button *ngFor="let option of control.options" [value]="option.key">
           <ion-label>{{option.label}}</ion-label>
         </ion-segment-button>
       </ion-segment>
 
-      </ion-item>
-    </ion-list>
-  </form>
-  
+    </ion-item>
+  </ion-list>
+</form>

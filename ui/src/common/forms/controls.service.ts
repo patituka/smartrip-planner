@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
+import { CheckboxControl } from './checkbox.control';
 import { ControlDescriptor } from './control';
 import { DatetimeControl } from './datetime.control';
 import { RangeControl } from './range.control';
+import { SegmentControl } from './segment.control';
 import { SelectControl } from './select.control';
 import { TextareaControl } from './textarea.control';
 import { TextboxControl } from './textbox.control';
 
 @Injectable()
 export class ControlsService {
+  
   getControls(descriptors: ControlDescriptor[]) {
     let controls = descriptors.map((descriptor, index) => {
       let options = {
@@ -32,6 +35,10 @@ export class ControlsService {
           return new DatetimeControl(options);
         case 'range':
           return new RangeControl(options);
+        case 'segment':
+          return new SegmentControl(options);
+        case 'checkbox':
+          return new CheckboxControl(options);
         default:
           console.error(`${descriptor.type} is not supported`);
       }
