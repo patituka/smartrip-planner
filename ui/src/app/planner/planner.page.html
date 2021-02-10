@@ -5,6 +5,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Plan your trip</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
   <div *ngIf="controls else loading" >
     <dynamic-form 
       #dynamicForm="dynamicForm" 
@@ -23,10 +30,13 @@
 <ion-footer>
   <ion-toolbar>
     <ion-buttons end>
-      <button ion-button icon-right expand="full" (click)="submitForm($event)">
-        Submit
+      <ion-button ion-button icon-right 
+        size="large"
+        expand="block" 
+        fill="outline" (click)="submitForm($event)">
+          Submit
         <ion-icon name="send"></ion-icon>
-      </button>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

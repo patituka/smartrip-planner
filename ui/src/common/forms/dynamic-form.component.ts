@@ -40,9 +40,10 @@ export class DynamicFormComponent implements OnInit {
   ngOnInit() {
     this.form = this.controlsService.toFormGroup(this.form, this.controls);
 
-    this.form.addControl('name', new FormControl(''));
-
-    console.log(this.controls);
+    this.form.addControl('place', new FormGroup({
+      description: new FormControl(''),
+      place_id: new FormControl(''),
+    }));
   }
 
   get start(){
@@ -54,7 +55,8 @@ export class DynamicFormComponent implements OnInit {
   }
 
   onSearchTerm($event){
-    if ($event.detail.value == '') {
+    if ($event.detail.value == '' || 
+      (this.location && $event.detail.value == this.location.description)) {
       this.autocompleteItems = [];
       return;
     }
@@ -69,12 +71,15 @@ export class DynamicFormComponent implements OnInit {
     });
   }
   selectSearchResult(item) {
-    this.form.get('destination').setValue(item.description);
-    this.autocompleteItems = [];
-
     this.location = item
     this.placeid = this.location.place_id
-    console.log('placeid'+ this.placeid)
+    this.form.get('destination').setValue(this.location.description)
+
+    this.form.get('place').setValue({
+      description: this.location.description, 
+      place_id: this.location.place_id
+    });
+    this.autocompleteItems = [];
   }
   GoTo(){
     return window.location.href = 'https://www.google.com/maps/place/?q=place_id:'+this.placeid;

@@ -4,8 +4,8 @@ import { ControlBase } from './control-base';
 
 @Injectable()
 export class DynamicControlsService {
-  constructor() {
-  }
+  
+  constructor() {}
 
   toFormGroup(formGroup: FormGroup, controls: ControlBase<any>[]) {
     formGroup = formGroup || new FormGroup({});

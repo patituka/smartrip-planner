@@ -1,41 +1,37 @@
-
-
-<ion-content> 
-    <ion-button (click)="GoTo()" >Go To Selected Location</ion-button>
-</ion-content>
-
-
-
 <form (ngSubmit)="onSubmit()" [formGroup]="form">
-
   <ion-list>
-
     <ion-item *ngFor="let control of controls">
 
       <ion-label *ngIf="control.withLabel">{{ control.label }}</ion-label>
 
       <span *ngIf="control.controlType === 'textbox'">
         <ion-input 
-        [formControlName]="control.key" 
-        [id]="control.key"
-        [type]="control.type" 
-        (ionChange)="onSearchTerm($event)"    
-        placeholder="Search for a place">
-      </ion-input>
-      <ion-list [hidden]="autocompleteItems.length == 0">
-        <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+          [formControlName]="control.key" 
+          [id]="control.key"
+          [type]="control.type" 
+          (ionChange)="onSearchTerm($event)"    
+          placeholder="Search for a place">
+        </ion-input>
+        <ion-list [hidden]="autocompleteItems.length == 0">
+          <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
           {{ item.description }}
-        </ion-item>
-      </ion-list>
+          </ion-item>
+        </ion-list>
       </span>
       
-
-      <ion-textarea *ngIf="control.controlType === 'textarea'" [formControlName]="control.key" [id]="control.key"
+      <ion-textarea 
+        *ngIf="control.controlType === 'textarea'" 
+        [formControlName]="control.key" 
+        [id]="control.key"
         [placeholder]="control.label" rows="4">
       </ion-textarea>
 
-      <ion-datetime *ngIf="control.controlType === 'datetime'" [formControlName]="control.key"
-        [placeholder]="control.label" [min]="minDate" displayFormat="DD/MM/YYYY">
+      <ion-datetime 
+        *ngIf="control.controlType === 'datetime'"  [formControlName]="control.key" 
+        [placeholder]="control.label" 
+        [min]="minDate" 
+        pickerFormat="DDDD D MMM, YYYY"
+        displayFormat="DDDD D MMM, YYYY">
       </ion-datetime>
 
       <div *ngIf="control.controlType === 'checkbox'">
@@ -45,10 +41,18 @@
         </div>
       </div>
 
-      <ion-range *ngIf="control.controlType === 'range'" [formControlName]="control.key" [min]="control.min"
+      <ion-range 
+        *ngIf="control.controlType === 'range'" 
+        [formControlName]="control.key" 
+        [min]="control.min"
         [max]="control.max" pin color="secondary">
-        <ion-icon slot="start" size="small" [name]="control.icon"></ion-icon>
-        <ion-icon slot="end" [name]="control.icon"></ion-icon>
+        <ion-icon 
+          slot="start" 
+          size="small" [name]="control.icon"></ion-icon>
+        <ion-icon 
+          slot="end" 
+          [name]="control.icon">
+        </ion-icon>
       </ion-range>
 
       <ion-select *ngIf="control.controlType === 'select'" [formControlName]="control.key" [id]="control.key"
@@ -65,7 +69,6 @@
           <ion-label>{{option.label}}</ion-label>
         </ion-segment-button>
       </ion-segment>
-
     </ion-item>
   </ion-list>
 </form>

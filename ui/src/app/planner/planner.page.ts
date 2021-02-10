@@ -31,7 +31,7 @@ export class PlannerPage {
 			.then(res => {
 				const controls: ControlDescriptor[] = JSON.parse(res.data);
 				this.controls = this.controlsService.getControls(controls);
-			})
+			});
 			
 		this.form.valueChanges
 			.subscribe(val => {
