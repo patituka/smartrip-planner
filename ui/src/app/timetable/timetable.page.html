@@ -9,9 +9,16 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Timetable</ion-title>
+      <ion-title size="large">{{ viewDate }}</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  
+  <mwl-calendar-week-view
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)">
+  </mwl-calendar-week-view>
+ 
 </ion-content>
